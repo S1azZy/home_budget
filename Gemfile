@@ -32,6 +32,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+gem "oj"
 
 gem "haml"
 gem "haml-rails"
@@ -70,4 +71,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "ffaker"
+  gem 'shoulda-matchers', '~> 5.0'
 end

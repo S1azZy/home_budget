@@ -17,6 +17,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_062609) do
   create_table "currencies", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.string "code", limit: 3, null: false
+    t.string "symbol", limit: 20, null: false
+    t.string "symbol_native", limit: 20, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_currencies_on_code", unique: true
