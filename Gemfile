@@ -48,8 +48,8 @@ gem "rubocop-performance", require: false
 gem "rubocop-rails", require: false
 gem "rubocop-rspec", require: false
 
-gem "bundler-audit", require: false
 gem "brakeman", require: false
+gem "bundler-audit", require: false
 gem "rubycritic", require: false
 
 group :development, :test do
@@ -73,8 +73,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
   gem "ffaker"
-  gem 'shoulda-matchers', '~> 5.0'
+  gem "selenium-webdriver"
+  gem "shoulda-matchers", "~> 5.0"
+  gem "webdrivers"
 end

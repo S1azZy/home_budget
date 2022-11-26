@@ -3,6 +3,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - 'db/schema.rb'
+    - 'vendor/bundle/**/*'
     - 'bin/*'
 
 require:
