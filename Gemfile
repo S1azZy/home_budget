@@ -43,10 +43,14 @@ gem "haml-rails"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem "rubocop"
-gem "rubocop-performance"
-gem "rubocop-rails"
-gem "rubocop-rspec"
+gem "rubocop", require: false
+gem "rubocop-performance", require: false
+gem "rubocop-rails", require: false
+gem "rubocop-rspec", require: false
+
+gem "bundler-audit", require: false
+gem "brakeman", require: false
+gem "rubycritic", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
