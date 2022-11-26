@@ -26,11 +26,11 @@ jobs:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
-      - name: Lock bundle
-        run: bundle lock --add-platform x86_64-linux
       - name: Checkout code
         uses: actions/checkout@v3
       # Add or replace dependency steps here
+      - name: Lock bundle
+        run: bundle lock --add-platform x86_64-linux
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa # v1.115.3
         with:
@@ -45,10 +45,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Lock bundle
-        run: bundle lock --add-platform x86_64-linux
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Lock bundle
+        run: bundle lock --add-platform x86_64-linux
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@0a29871fe2b0200a17a4497bae54fe5df0d973aa # v1.115.3
         with:
