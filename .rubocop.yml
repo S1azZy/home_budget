@@ -11,6 +11,14 @@ require:
   - rubocop-rspec
   - rubocop-performance
 
+Metrics/AbcSize:
+  Exclude:
+    - "db/migrations/*.rb"
+
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrations/*.rb"
+
 Style/Documentation:
   Enabled: false
 
