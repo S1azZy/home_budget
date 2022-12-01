@@ -13,11 +13,11 @@ require:
 
 Metrics/AbcSize:
   Exclude:
-    - "db/migrations/*.rb"
+    - "db/migrate/*.rb"
 
 Metrics/MethodLength:
   Exclude:
-    - "db/migrations/*.rb"
+    - "db/migrate/*.rb"
 
 Style/Documentation:
   Enabled: false

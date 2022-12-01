@@ -31,3 +31,6 @@
 /config/master.key
 
 .idea/*
+
+/config/*.local.yml
+/config/credentials/local.*

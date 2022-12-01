@@ -68,6 +68,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    anyway_config (2.3.0)
+      ruby-next-core (>= 0.14.0)
     ast (2.4.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
@@ -246,6 +248,7 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
     rubocop-rspec (2.15.0)
       rubocop (~> 1.33)
+    ruby-next-core (0.15.3)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.6.1)
@@ -300,6 +303,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  anyway_config (~> 2.0)
   bcrypt
   bootsnap
   brakeman
