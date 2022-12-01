@@ -11,10 +11,9 @@ class UserTransaction < ApplicationRecord
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100_000_000 }
   validate :income_or_expense_must_be_set
 
-
   def income_or_expense_must_be_set
-    if expense.zero? && income.zero?
-      errors.add(:income, "Должен быть установлен приход или расход!")
-    end
+    return unless (expense + income).zero?
+
+    errors.add(:income, "Должен быть установлен приход или расход!")
   end
 end
