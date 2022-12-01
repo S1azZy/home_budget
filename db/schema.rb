@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_070419) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_01_103409) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -23,6 +23,52 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_070419) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_currencies_on_code", unique: true
+  end
+
+  create_table "documents_expense_operations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "user_wallet_id", null: false
+    t.bigint "currency_id", null: false
+    t.integer "status", default: 0, null: false
+    t.decimal "amount", precision: 10, scale: 4, default: "0.0", null: false
+    t.decimal "currency_rate", precision: 10, scale: 10, default: "0.0", null: false
+    t.datetime "transaction_time", null: false
+    t.string "comment", limit: 255
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_documents_expense_operations_on_currency_id"
+    t.index ["user_id"], name: "index_documents_expense_operations_on_user_id"
+    t.index ["user_wallet_id"], name: "index_documents_expense_operations_on_user_wallet_id"
+  end
+
+  create_table "documents_income_operations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "user_wallet_id", null: false
+    t.integer "status", default: 0, null: false
+    t.decimal "amount", precision: 10, scale: 4, default: "0.0", null: false
+    t.datetime "transaction_time", null: false
+    t.string "comment", limit: 255
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_documents_income_operations_on_user_id"
+    t.index ["user_wallet_id"], name: "index_documents_income_operations_on_user_wallet_id"
+  end
+
+  create_table "documents_money_transfers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "user_wallet_from_id", null: false
+    t.bigint "user_wallet_to_id", null: false
+    t.integer "status", default: 0, null: false
+    t.decimal "amount_from", precision: 10, scale: 4, default: "0.0", null: false
+    t.decimal "amount_to", precision: 10, scale: 4, default: "0.0", null: false
+    t.decimal "currency_rate", precision: 10, scale: 10, default: "1.0", null: false
+    t.datetime "transaction_time", null: false
+    t.string "comment", limit: 255
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_documents_money_transfers_on_user_id"
+    t.index ["user_wallet_from_id"], name: "index_documents_money_transfers_on_user_wallet_from_id"
+    t.index ["user_wallet_to_id"], name: "index_documents_money_transfers_on_user_wallet_to_id"
   end
 
   create_table "user_configs", force: :cascade do |t|
@@ -92,6 +138,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_070419) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "documents_expense_operations", "currencies", on_delete: :restrict
+  add_foreign_key "documents_expense_operations", "user_wallets", on_delete: :restrict
+  add_foreign_key "documents_expense_operations", "users"
+  add_foreign_key "documents_income_operations", "user_wallets", on_delete: :restrict
+  add_foreign_key "documents_income_operations", "users"
+  add_foreign_key "documents_money_transfers", "user_wallets", column: "user_wallet_from_id", on_delete: :restrict
+  add_foreign_key "documents_money_transfers", "user_wallets", column: "user_wallet_to_id", on_delete: :restrict
+  add_foreign_key "documents_money_transfers", "users"
   add_foreign_key "user_configs", "currencies", column: "default_currency_id", on_delete: :restrict
   add_foreign_key "user_configs", "users"
   add_foreign_key "user_transactions", "currencies", on_delete: :restrict

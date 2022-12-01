@@ -8,7 +8,7 @@ class UserTransaction < ApplicationRecord
   validates :income,
             :expense,
             allow_blank: true,
-            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100_000_000 }
+            numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: DEFAULT_MAXIMUM_AMOUNT }
   validate :income_or_expense_must_be_set
 
   def income_or_expense_must_be_set

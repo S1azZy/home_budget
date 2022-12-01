@@ -7,7 +7,7 @@ class UserWallet < ApplicationRecord
 
   validates :wallet_type, presence: true
   validates :name, presence: true, length: { maximum: 255 }
-  validates :amount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100_000_000 }
+  validates :amount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: DEFAULT_MAXIMUM_AMOUNT }
 
   enum wallet_type: {
     cash: 0,
