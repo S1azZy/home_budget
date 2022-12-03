@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserConfig < ApplicationRecord
-  belongs_to :user
+class PersonConfig < ApplicationRecord
+  belongs_to :person
   belongs_to :default_currency, class_name: "Currency"
 end

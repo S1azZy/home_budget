@@ -2,10 +2,11 @@
 
 module Documents
   class MoneyTransfer < ApplicationRecord
-    belongs_to :user
-    belongs_to :user_wallet_from, class_name: "UserWallet"
-    belongs_to :user_wallet_to, class_name: "UserWallet"
-    has_many :user_transactions, as: :initiator_document, class_name: "UserTransaction", dependent: :restrict_with_error
+    belongs_to :person
+    belongs_to :person_wallet_from, class_name: "PersonWallet"
+    belongs_to :person_wallet_to, class_name: "PersonWallet"
+    has_many :person_transactions, as: :initiator_document, class_name: "PersonTransaction",
+                                   dependent: :restrict_with_error
 
     attribute :currency_rate, default: -> { 1 }
 

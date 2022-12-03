@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
-class UserTransaction < ApplicationRecord
-  belongs_to :user_wallet
+class PersonTransaction < ApplicationRecord
+  belongs_to :person_wallet
   belongs_to :currency
+  belongs_to :category
   belongs_to :initiator_document, polymorphic: true
+
+  has_many :transaction_categories, dependent: :destroy
+  has_many :categories, through: :transaction_categories
 
   validates :income,
             :expense,

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class UserWallet < ApplicationRecord
-  belongs_to :user
+class PersonWallet < ApplicationRecord
+  belongs_to :person
   belongs_to :currency
-  belongs_to :group, class_name: "UserWalletGroup", optional: true
+  belongs_to :group, class_name: "PersonWalletGroup", optional: true
 
   validates :wallet_type, presence: true
   validates :name, presence: true, length: { maximum: 255 }

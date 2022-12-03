@@ -2,6 +2,6 @@
 
 require "rails_helper"
 
-RSpec.describe UserConfig do
+RSpec.describe PersonConfig do
   pending "add some examples to (or delete) #{__FILE__}"
 end

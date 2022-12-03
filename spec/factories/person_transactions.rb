@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :user_transaction do
-    association :user_wallet
+  factory :person_transaction do
+    association :person_wallet
     association :currency
     association :initiator_document
 
