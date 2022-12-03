@@ -18,6 +18,10 @@ RSpec.describe Documents::ExpenseOperation do
     it { is_expected.to validate_presence_of(:amount) }
     it { is_expected.to validate_numericality_of(:amount).is_greater_than(0).is_less_than_or_equal_to(100_000_000) }
     it { is_expected.to validate_presence_of(:currency_rate) }
-    it { is_expected.to validate_numericality_of(:currency_rate).is_greater_than(0).is_less_than_or_equal_to(100_000_000) }
+
+    it {
+      expect(model)
+        .to validate_numericality_of(:currency_rate).is_greater_than(0).is_less_than_or_equal_to(100_000_000)
+    }
   end
 end

@@ -15,10 +15,19 @@ RSpec.describe Documents::MoneyTransfer do
     it { is_expected.to validate_length_of(:comment).is_at_most(255) }
     it { is_expected.to validate_presence_of(:transaction_time) }
     it { is_expected.to validate_presence_of(:amount_from) }
-    it { is_expected.to validate_numericality_of(:amount_from).is_greater_than(0).is_less_than_or_equal_to(100_000_000) }
+
+    it {
+      expect(model)
+        .to validate_numericality_of(:amount_from).is_greater_than(0).is_less_than_or_equal_to(100_000_000)
+    }
+
     it { is_expected.to validate_presence_of(:amount_to) }
     it { is_expected.to validate_numericality_of(:amount_to).is_greater_than(0).is_less_than_or_equal_to(100_000_000) }
     it { is_expected.to validate_presence_of(:currency_rate) }
-    it { is_expected.to validate_numericality_of(:currency_rate).is_greater_than(0).is_less_than_or_equal_to(100_000_000) }
+
+    it {
+      expect(model)
+        .to validate_numericality_of(:currency_rate).is_greater_than(0).is_less_than_or_equal_to(100_000_000)
+    }
   end
 end

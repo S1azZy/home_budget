@@ -12,8 +12,15 @@ RSpec.describe PersonTransaction do
   end
 
   describe "validations" do
-    it { is_expected.to validate_numericality_of(:income).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(100_000_000) }
-    it { is_expected.to validate_numericality_of(:expense).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(100_000_000) }
+    it {
+      expect(model)
+        .to validate_numericality_of(:income).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(100_000_000)
+    }
+
+    it {
+      expect(model)
+        .to validate_numericality_of(:expense).is_greater_than_or_equal_to(0).is_less_than_or_equal_to(100_000_000)
+    }
 
     describe "income_or_expense_must_be_set" do
       before do

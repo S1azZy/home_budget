@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 RSpec.describe TransactionCategory do
   subject(:model) { build(:transaction_category) }
