@@ -5,6 +5,8 @@ class PersonWallet < ApplicationRecord
   belongs_to :currency
   belongs_to :group, class_name: "PersonWalletGroup", optional: true
 
+  has_many :person_transactions, dependent: :restrict_with_error
+
   validates :wallet_type, presence: true
   validates :name, presence: true, length: { maximum: 255 }
   validates :amount, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: DEFAULT_MAXIMUM_AMOUNT }

@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", limit: 100, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_categories_on_name", unique: true
@@ -81,8 +81,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", limit: 100, null: false
+    t.string "last_name", limit: 100
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -120,7 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
   end
 
   create_table "person_wallets", force: :cascade do |t|
-    t.uuid "people_id", null: false
+    t.uuid "person_id", null: false
     t.bigint "currency_id", null: false
     t.integer "wallet_type", limit: 2, null: false
     t.string "name", limit: 255, null: false
@@ -131,16 +131,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
     t.bigint "group_id"
     t.index ["currency_id"], name: "index_person_wallets_on_currency_id"
     t.index ["group_id"], name: "index_person_wallets_on_group_id"
-    t.index ["people_id"], name: "index_person_wallets_on_people_id"
+    t.index ["person_id"], name: "index_person_wallets_on_person_id"
   end
 
   create_table "transaction_categories", force: :cascade do |t|
-    t.uuid "transaction_id", null: false
+    t.uuid "person_transaction_id", null: false
     t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_transaction_categories_on_category_id"
-    t.index ["transaction_id", "category_id"], name: "index_transaction_categories_on_transaction_id_and_category_id", unique: true
+    t.index ["person_transaction_id", "category_id"], name: "idx_unique_on_person_transaction_id_and_category_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -181,9 +181,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
   add_foreign_key "person_transactions", "person_wallets", on_delete: :restrict
   add_foreign_key "person_wallet_groups", "people"
   add_foreign_key "person_wallets", "currencies"
-  add_foreign_key "person_wallets", "people", column: "people_id"
+  add_foreign_key "person_wallets", "people"
   add_foreign_key "person_wallets", "person_wallet_groups", column: "group_id"
   add_foreign_key "transaction_categories", "categories"
-  add_foreign_key "transaction_categories", "person_transactions", column: "transaction_id"
+  add_foreign_key "transaction_categories", "person_transactions"
   add_foreign_key "users", "people"
 end

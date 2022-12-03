@@ -9,4 +9,6 @@ class Currency < ApplicationRecord
   validates :symbol_native, presence: true, length: { maximum: 20 }
 
   validates :code, uniqueness: { case_sensitive: false }
+
+  has_many :documents_expense_operations, class_name: 'Documents::ExpenseOperation', dependent: :restrict_with_error
 end

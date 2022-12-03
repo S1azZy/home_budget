@@ -3,7 +3,7 @@
 class CreatePersonWallets < ActiveRecord::Migration[7.0]
   def change
     create_table :person_wallets do |t|
-      t.references :people, type: :uuid, null: false, foreign_key: true
+      t.references :person, type: :uuid, null: false, foreign_key: true
       t.references :currency, null: false, foreign_key: true
       t.integer :wallet_type, limit: 2, null: false
       t.string :name, limit: 255, null: false

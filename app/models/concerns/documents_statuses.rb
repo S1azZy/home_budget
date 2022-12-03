@@ -2,9 +2,10 @@
 
 module DocumentsStatuses
   extend ActiveSupport::Concern
-  include AASM
 
   included do
+    include AASM
+
     validates :status, presence: true
 
     enum status: {

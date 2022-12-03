@@ -1,6 +1,6 @@
 class TransactionCategory < ApplicationRecord
-  belongs_to :transaction, class_name: 'PersonTransaction'
+  belongs_to :person_transaction
   belongs_to :category
 
-  validates :transaction_id, uniqueness: { scope: :category_id }
+  validates :person_transaction_id, uniqueness: { scope: :category_id, case_sensitive: false }
 end

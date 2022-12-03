@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe PersonWalletGroup do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:model) { build(:person_wallet_group) }
+
+  describe "associations" do
+    it { is_expected.to belong_to(:person) }
+    it { is_expected.to have_many(:person_wallets).dependent(:nullify).inverse_of(:group) }
+  end
+
+  describe "validations" do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_length_of(:name).is_at_most(255) }
+  end
 end

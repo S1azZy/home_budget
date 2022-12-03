@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe PersonConfig do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:model) { build(:person_config) }
+
+  describe "associations" do
+    it { is_expected.to belong_to(:person) }
+    it { is_expected.to belong_to(:default_currency) }
+  end
 end

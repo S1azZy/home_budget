@@ -3,9 +3,13 @@
 require "rails_helper"
 
 RSpec.describe Currency do
-  describe "validations" do
-    subject { build(:currency) }
+  subject { build(:currency) }
 
+  describe "associations" do
+    it { is_expected.to have_many(:documents_expense_operations).dependent(:restrict_with_error) }
+  end
+
+  describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_length_of(:name).is_at_most(50) }
     it { is_expected.to validate_presence_of(:code) }
