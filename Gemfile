@@ -17,6 +17,7 @@ gem "bcrypt"
 gem "bootsnap", require: false
 gem "brakeman", require: false
 gem "bundler-audit", require: false
+gem "bulma-rails"
 gem "devise"
 gem "haml"
 gem "haml-rails"
@@ -62,3 +63,5 @@ group :test do
 
   gem "webdrivers"
 end
+
+gem "cssbundling-rails", "~> 1.1"
