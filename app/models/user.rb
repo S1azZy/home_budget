@@ -13,6 +13,6 @@ class User < ApplicationRecord
   def create_associated_person
     return if person
 
-    create_person(first_name: self.first_name, last_name: self.last_name)
+    create_person(first_name:, last_name:)
   end
 end

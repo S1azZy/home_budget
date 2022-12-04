@@ -1,5 +1,5 @@
-class PersonWalletsController < ApplicationController
-  def index
+# frozen_string_literal: true
 
-  end
+class PersonWalletsController < ApplicationController
+  def index; end
 end
