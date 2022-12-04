@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class HelloWorldController < ApplicationController
+class HomeController < ApplicationController
   def index; end
 end

@@ -17,7 +17,6 @@ gem "bcrypt"
 gem "bootsnap", require: false
 gem "brakeman", require: false
 gem "bundler-audit", require: false
-gem "bulma-rails"
 gem "devise"
 gem "haml"
 gem "haml-rails"
@@ -33,7 +32,7 @@ gem "rubocop-rails", require: false
 gem "rubocop-rspec", require: false
 gem "sprockets-rails"
 gem "stimulus-rails"
-gem "turbo-rails"
+#gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do

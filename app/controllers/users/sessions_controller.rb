@@ -2,10 +2,8 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    # GET /resource/sign_in
-
-    # POST /resource/sign_in
-
-    # DELETE /resource/sign_out
+    def new
+      super
+    end
   end
 end

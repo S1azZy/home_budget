@@ -1,0 +1,18 @@
+- if controller_name != 'sessions'
+  %nav.navbar.is-dark{ role: "navigation", "aria-label" => "main navigation" }
+    %div{ class: "navbar-menu", id: "navbarBasicExample" }
+      - if current_person
+        %div.navbar-start
+          %a.navbar-item{ href: root_path } Home
+          %a.navbar-item{ href: person_wallets_path, class: controller_name == "person_wallets" ? "is-active" : "" } Person wallets
+        %div.navbar-end
+          %div.navbar-item
+            %div.buttons
+              = button_to "Log out", destroy_user_session_path, class: "button is-light", method: :delete
+      - else
+        %div.navbar-end
+          %div.navbar-item
+            %div.buttons
+              = link_to new_user_registration_path, class: "button is-primary" do
+                %strong Sign up
+              = link_to "Log in", new_user_session_path, class: "button is-light"
