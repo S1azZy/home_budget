@@ -3,6 +3,8 @@
     %div{ class: "navbar-menu", id: "navbarBasicExample" }
       - if current_person
         %div.navbar-start
+          %a.navbar-item{ href: "#" }
+            = ENV["RAILS_ENV"]
           %a.navbar-item{ href: root_path } Home
           %a.navbar-item{ href: person_wallets_path, class: controller_name == "person_wallets" ? "is-active" : "" } Person wallets
         %div.navbar-end

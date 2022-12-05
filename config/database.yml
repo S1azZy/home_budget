@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: home_budget_production
-  username: home_budget
-  password: <%= ENV["HOME_BUDGET_DATABASE_PASSWORD"] %>
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
