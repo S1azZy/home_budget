@@ -14,11 +14,11 @@ ruby "3.1.3"
 gem "aasm"
 gem "anyway_config", "~> 2.0"
 gem "bcrypt"
-gem "font-awesome-sass"
 gem "bootsnap", require: false
 gem "brakeman", require: false
 gem "bundler-audit", require: false
 gem "devise"
+gem "font-awesome-sass"
 gem "haml"
 gem "haml-rails"
 gem "importmap-rails"

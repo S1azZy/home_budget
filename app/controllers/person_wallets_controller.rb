@@ -12,6 +12,10 @@ class PersonWalletsController < ApplicationController
     @person_wallet = PersonWallet.new
   end
 
+  def edit
+    @person_wallet = PersonWallet.find(params[:id])
+  end
+
   def create
     @person_wallet = PersonWallet.new(person_wallet_params.merge(person: current_person))
 
@@ -22,10 +26,6 @@ class PersonWalletsController < ApplicationController
       flash[:alert] = "Ошибка во время создания"
       render :new
     end
-  end
-
-  def edit
-    @person_wallet = PersonWallet.find(params[:id])
   end
 
   def update
@@ -39,7 +39,6 @@ class PersonWalletsController < ApplicationController
       render :edit
     end
   end
-
 
   private
 

@@ -3,9 +3,9 @@
 data = [
   ["no_category", "Без категории"],
   ["restaurants", "Кафе, рестораны"],
-  ["shopping", "Покупки"],
-  ["transport", "Транспорт"],
-  ["travel", "Путешествия"]
+  %w[shopping Покупки],
+  %w[transport Транспорт],
+  %w[travel Путешествия]
 ]
 
 data.each do |(slug, name)|
