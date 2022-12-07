@@ -14,6 +14,7 @@ ruby "3.1.3"
 gem "aasm"
 gem "anyway_config", "~> 2.0"
 gem "bcrypt"
+gem "font-awesome-sass"
 gem "bootsnap", require: false
 gem "brakeman", require: false
 gem "bundler-audit", require: false
@@ -22,6 +23,7 @@ gem "haml"
 gem "haml-rails"
 gem "importmap-rails"
 gem "oj"
+gem "pagy"
 gem "pg"
 gem "puma"
 gem "rails", "~> 7.0.4"
@@ -32,7 +34,7 @@ gem "rubocop-rails", require: false
 gem "rubocop-rspec", require: false
 gem "sprockets-rails"
 gem "stimulus-rails"
-# gem "turbo-rails"
+gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do

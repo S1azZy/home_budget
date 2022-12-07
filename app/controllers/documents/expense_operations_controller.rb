@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class PersonWalletsController < ApplicationController
+class Documents::ExpenseOperationsController < ApplicationController
   include Pagy::Backend
 
   before_action :authenticate_user!
   def index
-    @person_wallets = PersonWallet.where(person: current_person).includes(:currency, :group)
+    @expense_operations = Documents::ExpenseOperation.where(person: current_person).includes(:person_wallet, :currency, :category)
   end
 
   def new
-    @person_wallet = PersonWallet.new
+    @expense_operation = Documents::ExpenseOperation.new
   end
 
   def create

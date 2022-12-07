@@ -1,0 +1,29 @@
+%table.table.is-hoverable.is-striped.is-fullwidth
+  %thead
+    %tr
+      %th
+        = link_to "Новый кошелек", new_person_wallet_path,  class: "button is-info"
+    %tr
+      %th
+        %abbr{ title: "ID" } ID
+      %th
+        %abbr{ title: "Name" } Name
+      %th
+        %abbr{ title: "Currency" } Currency
+      %th
+        %abbr{ title: "Amount" } Amount
+      %th
+        %abbr{ title: "Actions" } Actions
+  %tbody
+    - @person_wallets.each do |person_wallet|
+      %tr
+        %th
+          = person_wallet.id
+        %td
+          = person_wallet.name
+        %td
+          = person_wallet.currency.code
+        %td
+          = number_to_human(person_wallet.amount, precision: 2)
+        %td
+          = link_to "edit", edit_person_wallet_path(person_wallet), class: "button is-info"

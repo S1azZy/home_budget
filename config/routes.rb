@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :person_wallets
+  resources :person_wallets, except: [:destroy, :show]
+
+  namespace :documents do
+    resources :expense_operations
+  end
 end

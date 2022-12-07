@@ -1,0 +1,26 @@
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .column.is-4.is-offset-4
+        %h3.title.has-text-black Новый кошелек
+        %hr.login-hr
+        .box
+          = form_for(@person_wallet, url: person_wallets_path) do |f|
+            .field.control
+              = f.text_field :name, placeholder: "Название", class: "input is-large"
+            .field.control.select.is-medium
+              = f.collection_select :currency_id, Currency.default_list, :id, :code
+            .field.control
+              = f.label :wallet_type, class: "radio" do
+                Наличные
+                = f.radio_button :wallet_type, :cash, class: "radio", checked: true
+              = f.label :wallet_type, class: "radio" do
+                Банковский аккаунт
+                = f.radio_button :wallet_type, :bank_account, class: "radio"
+            .field.control
+              = f.label :no_balance_control, class: "checkbox" do
+                Не контролировать баланс
+                = f.check_box :no_balance_control, class: "checkbox is-large"
+            %button.button.is-block.is-info.is-fullwidth{type: "submit"}
+              Сохранить
+              %i.fa.fa-sign-in{"aria-hidden" => "true"}

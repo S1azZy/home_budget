@@ -1,0 +1,37 @@
+%table.table.is-hoverable.is-striped.is-fullwidth
+  %thead
+    %tr
+      %th
+        = link_to "Новый расход", new_documents_expense_operation_path,  class: "button is-info"
+    %tr
+      %th
+        %abbr{ title: "ID" } ID
+      %th
+        %abbr{ title: "Name" } Кошелек
+      %th
+        %abbr{ title: "Currency" } Валюта
+      %th
+        %abbr{ title: "Category" } Категория
+      %th
+        %abbr{ title: "Amount" } Сумма
+      %th
+        %abbr{ title: "Date" } Дата
+      %th
+        %abbr{ title: "Actions" } Действия
+  %tbody
+    - @expense_operations.each do |expense_operation|
+      %tr
+        %th
+          = expense_operation.id
+        %td
+          = expense_operation.person_wallet.name
+        %td
+          = expense_operation.currency.code
+        %td
+          = expense_operation.category.name
+        %td
+          = number_to_human(expense_operation.amount, precision: 2)
+        %td
+          = expense_operation.transaction_time
+        %td
+          = link_to "edit", edit_documents_expense_operation_path(expense_operation), class: "button is-info"
