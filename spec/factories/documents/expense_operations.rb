@@ -9,6 +9,7 @@ FactoryBot.define do
 
     amount { 1_000 }
     currency_rate { 1 }
+    multiplicity { 1 }
     transaction_time { Time.current }
     status { :draft }
     comment { FFaker::Lorem.sentence }

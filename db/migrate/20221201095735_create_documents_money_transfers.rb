@@ -10,10 +10,10 @@ class CreateDocumentsMoneyTransfers < ActiveRecord::Migration[7.0]
                                       index: true, foreign_key: { to_table: :person_wallets, on_delete: :restrict }
       t.integer :status, null: false, default: 0
 
-      t.numeric :amount_from, null: false, default: 0, precision: 10, scale: 4
-      t.numeric :amount_to, null: false, default: 0, precision: 10, scale: 4
+      t.numeric :amount_from, null: false, default: 0, precision: 14, scale: 4
+      t.numeric :amount_to, null: false, default: 0, precision: 14, scale: 4
 
-      t.numeric :currency_rate, null: false, default: 1, precision: 10, scale: 10
+      t.numeric :currency_rate, null: false, default: 1, precision: 20, scale: 10
       t.datetime :transaction_time, null: false
 
       t.string :comment, null: true, limit: 255

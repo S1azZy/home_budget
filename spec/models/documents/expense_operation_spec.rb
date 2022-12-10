@@ -23,5 +23,10 @@ RSpec.describe Documents::ExpenseOperation do
       expect(model)
         .to validate_numericality_of(:currency_rate).is_greater_than(0).is_less_than_or_equal_to(100_000_000)
     }
+
+    it {
+      expect(model)
+        .to validate_numericality_of(:multiplicity).is_greater_than(0).is_less_than_or_equal_to(100_000)
+    }
   end
 end

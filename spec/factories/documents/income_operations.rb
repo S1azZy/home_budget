@@ -8,5 +8,6 @@ FactoryBot.define do
     amount { 1_000 }
     transaction_time { Time.current }
     status { :draft }
+    multiplicity { 1 }
   end
 end

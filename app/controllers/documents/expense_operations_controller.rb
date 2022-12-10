@@ -5,47 +5,67 @@ module Documents
     include Pagy::Backend
 
     before_action :authenticate_user!
+    before_action :set_variables, only: %i[new edit create]
+    before_action :set_document, only: [:edit, :update, :destroy]
     def index
-      @expense_operations = Documents::ExpenseOperation.where(person: current_person).includes(:person_wallet, :currency,
-                                                                                               :category)
+      expense_operations =
+        Documents::ExpenseOperation.where(person: current_person).includes(:person_wallet, :currency, :category)
+      @pagy, @expense_operations = pagy(expense_operations)
     end
 
     def new
       @expense_operation = Documents::ExpenseOperation.new
     end
 
-    def edit
-      @person_wallet = PersonWallet.find(params[:id])
-    end
+    def edit; end
 
     def create
-      @person_wallet = PersonWallet.new(person_wallet_params.merge(person: current_person))
+      service = Documents::ExpenseOperations::CreateService.new(current_person, expense_operations_params)
 
-      if @person_wallet.save
-        flash[:notice] = "Кошелек успешно создан"
-        redirect_to person_wallet_path(@person_wallet)
+      if service.call
+        redirect_to documents_expense_operations_path
       else
-        flash[:alert] = "Ошибка во время создания"
+        @expense_operation = Documents::ExpenseOperation.new
+        flash[:alert] = "Ошибка во время сохранения"
         render :new
       end
     end
 
     def update
-      @person_wallet = PersonWallet.find(params[:id])
+      service = Documents::ExpenseOperations::UpdateService.new(@expense_operation, expense_operations_params)
 
-      if @person_wallet.update(person_wallet_params)
-        flash[:notice] = "Кошелек успешно обновлен"
-        redirect_to person_wallet_path(@person_wallet)
+      if service.call
+        flash[:notice] = "Документ успешно обновлен"
+        redirect_to documents_expense_operation_path(@expense_operation)
       else
         flash[:alert] = "Ошибка во время сохранения"
         render :edit
       end
     end
 
+    def destroy
+      if @expense_operation.destroy
+        flash[:notice] = "Документ удален"
+      else
+        flash[:alert] = "Не получилось удалить"
+      end
+
+      redirect_to documents_expense_operations_path
+    end
+
     private
 
-    def person_wallet_params
-      params.require(:person_wallet).permit(:name, :currency_id, :wallet_type, :no_balance_control)
+    def expense_operations_params
+      params.require(:documents_expense_operation).permit(:person_wallet_id, :currency_id, :category_id, :amount,
+                                                          :transaction_time, :comment, :event)
+    end
+
+    def set_variables
+      @person_wallets = PersonWallet.where(person: current_person)
+    end
+
+    def set_document
+      @expense_operation = Documents::ExpenseOperation.find(params[:id])
     end
   end
 end

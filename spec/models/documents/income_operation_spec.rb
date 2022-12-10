@@ -14,5 +14,10 @@ RSpec.describe Documents::IncomeOperation do
     it { is_expected.to validate_presence_of(:transaction_time) }
     it { is_expected.to validate_presence_of(:amount) }
     it { is_expected.to validate_numericality_of(:amount).is_greater_than(0).is_less_than_or_equal_to(100_000_000) }
+
+    it {
+      expect(model)
+        .to validate_numericality_of(:multiplicity).is_greater_than(0).is_less_than_or_equal_to(100_000)
+    }
   end
 end

@@ -9,10 +9,14 @@ class User < ApplicationRecord
   attribute :first_name
   attribute :last_name
 
-  after_initialize :create_associated_person
+  after_initialize :create_associated_person, unless: :person_created?
   def create_associated_person
     return if person
 
     create_person(first_name:, last_name:)
+  end
+
+  def person_created?
+    person.present?
   end
 end

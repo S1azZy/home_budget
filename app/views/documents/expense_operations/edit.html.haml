@@ -1,0 +1,31 @@
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .column.is-8.is-offset-2
+        %h3.title.has-text-black Редактирование расхода
+        %hr.login-hr
+        .box
+          = form_for(@expense_operation, url: documents_expense_operation_path(@expense_operation)) do |f|
+            .field.control.select.is-expanded
+              = f.collection_select :person_wallet_id, @person_wallets, :id, :name
+            .field.control.select.is-expanded
+              = f.collection_select :category_id, Category.all, :id, :name
+            .field.control
+              = f.number_field :amount, min: 0, max: 100_000_000, class: "input"
+            .field.control
+              = f.datetime_local_field :transaction_time, value: Time.current.strftime("%Y-%m-%dT%T") # TODO: вынести эти куда-то
+            .field.control
+              = f.text_area :comment, class: "textarea"
+
+              - if @expense_operation.draft?
+                = f.button :event, value: :post_document, type: :submit, class: "button is-block is-info is-fullwidth" do
+                  Записать
+                  %i.fa.fa-sign-in{"aria-hidden" => "true"}
+
+                = f.button type: :submit, class: "button is-block is-warning is-light is-fullwidth" do
+                  Записать черновик
+                  %i.fa.fa-sign-in{"aria-hidden" => "true"}
+              - else
+                = f.button type: :submit, class: "button is-block is-info is-fullwidth" do
+                  Записать
+                  %i.fa.fa-sign-in{"aria-hidden" => "true"}

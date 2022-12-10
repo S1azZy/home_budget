@@ -17,6 +17,7 @@ gem "bcrypt"
 gem "bootsnap", require: false
 gem "brakeman", require: false
 gem "bundler-audit", require: false
+gem "cssbundling-rails", "~> 1.1"
 gem "devise"
 gem "font-awesome-sass"
 gem "haml"
@@ -27,6 +28,7 @@ gem "pagy"
 gem "pg"
 gem "puma"
 gem "rails", "~> 7.0.4"
+gem "rails-i18n", "~> 7.0"
 gem "redis"
 gem "rubocop", require: false
 gem "rubocop-performance", require: false
@@ -64,5 +66,3 @@ group :test do
 
   gem "webdrivers"
 end
-
-gem "cssbundling-rails", "~> 1.1"

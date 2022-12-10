@@ -8,7 +8,7 @@ class CreatePersonWallets < ActiveRecord::Migration[7.0]
       t.integer :wallet_type, limit: 2, null: false
       t.string :name, limit: 255, null: false
 
-      t.numeric :amount, null: false, default: 0, precision: 10, scale: 4
+      t.numeric :amount, null: false, default: 0, precision: 14, scale: 4
 
       t.boolean :no_balance_control, null: false, default: false
 

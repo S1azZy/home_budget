@@ -1,0 +1,14 @@
+ru:
+  activerecord:
+    models:
+      user:
+        one: Юзер
+        other: Юзеры
+      person_wallet:
+        one: Кошелек
+        few: Кошелька
+        many: Кошельков
+        other: Кошельки
+      documents/expense_operation:
+        one: Расходная операция
+        other: Расходные операции

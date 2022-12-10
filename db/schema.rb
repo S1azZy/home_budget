@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_09_140327) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -40,12 +40,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
     t.bigint "currency_id", null: false
     t.bigint "category_id", null: false
     t.integer "status", default: 0, null: false
-    t.decimal "amount", precision: 10, scale: 4, default: "0.0", null: false
-    t.decimal "currency_rate", precision: 10, scale: 10, default: "0.0", null: false
+    t.decimal "amount", precision: 14, scale: 4, default: "0.0", null: false
+    t.decimal "currency_rate", precision: 20, scale: 10, default: "0.0", null: false
     t.datetime "transaction_time", null: false
     t.string "comment", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "multiplicity", default: "1.0", null: false
     t.index ["category_id"], name: "index_documents_expense_operations_on_category_id"
     t.index ["currency_id"], name: "index_documents_expense_operations_on_currency_id"
     t.index ["person_id"], name: "index_documents_expense_operations_on_person_id"
@@ -56,11 +57,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
     t.uuid "person_id", null: false
     t.bigint "person_wallet_id", null: false
     t.integer "status", default: 0, null: false
-    t.decimal "amount", precision: 10, scale: 4, default: "0.0", null: false
+    t.decimal "amount", precision: 14, scale: 4, default: "0.0", null: false
     t.datetime "transaction_time", null: false
     t.string "comment", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "multiplicity", default: "1.0", null: false
     t.index ["person_id"], name: "index_documents_income_operations_on_person_id"
     t.index ["person_wallet_id"], name: "index_documents_income_operations_on_person_wallet_id"
   end
@@ -70,9 +72,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
     t.bigint "person_wallet_from_id", null: false
     t.bigint "person_wallet_to_id", null: false
     t.integer "status", default: 0, null: false
-    t.decimal "amount_from", precision: 10, scale: 4, default: "0.0", null: false
-    t.decimal "amount_to", precision: 10, scale: 4, default: "0.0", null: false
-    t.decimal "currency_rate", precision: 10, scale: 10, default: "1.0", null: false
+    t.decimal "amount_from", precision: 14, scale: 4, default: "0.0", null: false
+    t.decimal "amount_to", precision: 14, scale: 4, default: "0.0", null: false
+    t.decimal "currency_rate", precision: 20, scale: 10, default: "1.0", null: false
     t.datetime "transaction_time", null: false
     t.string "comment", limit: 255
     t.datetime "created_at", null: false
@@ -98,13 +100,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
     t.index ["person_id"], name: "index_person_configs_on_person_id"
   end
 
+  create_table "person_currencies", force: :cascade do |t|
+    t.uuid "person_id", null: false
+    t.bigint "currency_id", null: false
+    t.decimal "multiplicity", precision: 10, scale: 4, default: "1.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_person_currencies_on_currency_id"
+    t.index ["person_id", "currency_id"], name: "index_person_currencies_on_person_id_and_currency_id", unique: true
+  end
+
   create_table "person_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "person_wallet_id", null: false
     t.string "initiator_document_type", null: false
     t.uuid "initiator_document_id", null: false
     t.bigint "currency_id", null: false
-    t.decimal "income", precision: 10, scale: 4, default: "0.0", null: false
-    t.decimal "expense", precision: 10, scale: 4, default: "0.0", null: false
+    t.decimal "income", precision: 14, scale: 4, default: "0.0", null: false
+    t.decimal "expense", precision: 14, scale: 4, default: "0.0", null: false
     t.datetime "posted_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -126,7 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
     t.bigint "currency_id", null: false
     t.integer "wallet_type", limit: 2, null: false
     t.string "name", limit: 255, null: false
-    t.decimal "amount", precision: 10, scale: 4, default: "0.0", null: false
+    t.decimal "amount", precision: 14, scale: 4, default: "0.0", null: false
     t.boolean "no_balance_control", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -179,6 +191,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_02_144225) do
   add_foreign_key "documents_money_transfers", "person_wallets", column: "person_wallet_to_id", on_delete: :restrict
   add_foreign_key "person_configs", "currencies", column: "default_currency_id", on_delete: :restrict
   add_foreign_key "person_configs", "people"
+  add_foreign_key "person_currencies", "currencies"
+  add_foreign_key "person_currencies", "people"
   add_foreign_key "person_transactions", "currencies", on_delete: :restrict
   add_foreign_key "person_transactions", "person_wallets", on_delete: :restrict
   add_foreign_key "person_wallet_groups", "people"
