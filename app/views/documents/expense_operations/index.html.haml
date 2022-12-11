@@ -29,14 +29,14 @@
         %td
           = expense_operation.category.name
         %td
-          = number_to_human(expense_operation.total_amount, precision: 2)
+          = number_to_human(expense_operation.total_amount, precision: 3)
         %td
-          = expense_operation.transaction_time
+          = l(expense_operation.transaction_time.to_date, format: :default)
         %td
           %span.tag{class: status_class}
             = expense_operation.status
         %td
           .buttons
-            = button_to "edit", edit_documents_expense_operation_path(expense_operation), class: "button is-info"
+            = button_to "edit", edit_documents_expense_operation_path(expense_operation), method: :get, class: "button is-info"
             = button_to "delete", documents_expense_operation_path(expense_operation), method: :delete, class: "button is-danger"
 != pagy_bulma_nav(@pagy)

@@ -17,7 +17,8 @@ module Documents
         Documents::ExpenseOperation.transaction do
           document.person_transactions.destroy_all
 
-          transaction = document.person_transactions.create!(person_wallet: document.person_wallet, currency: document.currency, expense: document.total_amount, posted_at: document.transaction_time)
+          transaction = document.person_transactions.create!(person_wallet: document.person_wallet,
+                                                             currency: document.currency, expense: document.total_amount, posted_at: document.transaction_time)
           transaction.categories << document.category
         end
 

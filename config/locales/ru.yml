@@ -1,4 +1,4 @@
-en:
+ru:
   date:
     formats:
       # Use the strftime parameters for formats.
@@ -8,12 +8,12 @@ en:
       short: "%b %d"
       long: "%B %d, %Y"
 
-    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
-    abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+    day_names: [Воскресенье, Понедельни, Вторник, Среда, Четверг, Пятница, Суббота]
+    abbr_day_names: [Вс, Пн, Вт, Ср, Чт, Пт, Сб]
 
     # Don't forget the nil at the beginning; there's no such thing as a 0th month
     month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
-    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    abbr_month_names: [~, Янв, Фев, Мар, Апр, Май, Июнь, Июль, Авг, Сен, Окт, Ноя, Дек]
     # Used in date_select and datetime_select.
     order:
       - year
@@ -32,8 +32,8 @@ en:
   support:
     array:
       words_connector: ", "
-      two_words_connector: " and "
-      last_word_connector: ", and "
+      two_words_connector: " и "
+      last_word_connector: ", и "
   number:
     # Used in NumberHelper.number_to_delimited()
     # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
@@ -133,8 +133,18 @@ en:
           #   one: Ten
           #   other: Tens
           # hundred: Hundred
-          thousand: Thousand
-          million: Million
-          billion: Billion
-          trillion: Trillion
+          thousand: Тысяч
+          million: Миллион
+          billion: Миллиард
+          trillion: Триллионов
           quadrillion: Quadrillion
+  notifications:
+    create:
+      success: Успешно сохранено
+      failure: Сохранить не получилось
+    update:
+      success: Успешно обновлено
+      failure: При обновлении что-то пошло не так
+    destroy:
+      success: Удалено успешно
+      failure: При удалении что-то пошло не так

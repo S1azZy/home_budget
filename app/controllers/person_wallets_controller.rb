@@ -20,10 +20,10 @@ class PersonWalletsController < ApplicationController
     @person_wallet = PersonWallet.new(person_wallet_params.merge(person: current_person))
 
     if @person_wallet.save
-      flash[:notice] = "Кошелек успешно создан"
+      flash[:notice] = t("notifications.create.success")
       redirect_to person_wallet_path(@person_wallet)
     else
-      flash[:alert] = "Ошибка во время создания"
+      flash[:alert] = t("notifications.create.failure")
       render :new
     end
   end
@@ -32,10 +32,10 @@ class PersonWalletsController < ApplicationController
     @person_wallet = PersonWallet.find(params[:id])
 
     if @person_wallet.update(person_wallet_params)
-      flash[:notice] = "Кошелек успешно обновлен"
+      flash[:notice] = t("notifications.update.success")
       redirect_to person_wallet_path(@person_wallet)
     else
-      flash[:alert] = "Ошибка во время сохранения"
+      flash[:alert] = t("notifications.update.failure")
       render :edit
     end
   end

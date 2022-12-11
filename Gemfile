@@ -66,3 +66,5 @@ group :test do
 
   gem "webdrivers"
 end
+
+gem "terser", "~> 1.1"

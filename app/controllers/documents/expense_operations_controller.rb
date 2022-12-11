@@ -6,7 +6,7 @@ module Documents
 
     before_action :authenticate_user!
     before_action :set_variables, only: %i[new edit create]
-    before_action :set_document, only: [:edit, :update, :destroy]
+    before_action :set_document, only: %i[edit update destroy]
     def index
       expense_operations =
         Documents::ExpenseOperation.where(person: current_person).includes(:person_wallet, :currency, :category)
@@ -26,7 +26,7 @@ module Documents
         redirect_to documents_expense_operations_path
       else
         @expense_operation = Documents::ExpenseOperation.new
-        flash[:alert] = "Ошибка во время сохранения"
+        flash[:alert] = t("notifications.create.failure")
         render :new
       end
     end
@@ -35,19 +35,19 @@ module Documents
       service = Documents::ExpenseOperations::UpdateService.new(@expense_operation, expense_operations_params)
 
       if service.call
-        flash[:notice] = "Документ успешно обновлен"
+        flash[:notice] = t("notifications.update.success")
         redirect_to documents_expense_operation_path(@expense_operation)
       else
-        flash[:alert] = "Ошибка во время сохранения"
+        flash[:alert] = t("notifications.update.failure")
         render :edit
       end
     end
 
     def destroy
       if @expense_operation.destroy
-        flash[:notice] = "Документ удален"
+        flash[:notice] = t("notifications.destroy.success")
       else
-        flash[:alert] = "Не получилось удалить"
+        flash[:alert] = t("notifications.destroy.failure")
       end
 
       redirect_to documents_expense_operations_path
