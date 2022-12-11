@@ -4,6 +4,7 @@ class PersonWalletsController < ApplicationController
   include Pagy::Backend
 
   before_action :authenticate_user!
+  before_action :set_variables, only: [:new, :create, :edit, :update]
   def index
     @person_wallets = PersonWallet.where(person: current_person).includes(:currency, :group)
   end
@@ -41,6 +42,10 @@ class PersonWalletsController < ApplicationController
   end
 
   private
+
+  def set_variables
+    @currencies = Currency.join(:person_currencies).merge(PersonCurrency.where(person: current_person))
+  end
 
   def person_wallet_params
     params.require(:person_wallet).permit(:name, :currency_id, :wallet_type, :no_balance_control)

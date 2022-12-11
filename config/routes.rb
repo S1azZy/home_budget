@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :person_wallets, except: %i[destroy show]
 
   namespace :documents do
-    resources :expense_operations
+    resources :expense_operations, except: :show
+    resources :periodic_expenses, except: :show
   end
 end

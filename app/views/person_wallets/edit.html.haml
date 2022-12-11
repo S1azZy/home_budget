@@ -9,7 +9,7 @@
             .field.control
               = f.text_field :name, placeholder: "Название", class: "input is-large"
             .field.control.select.is-medium
-              = f.collection_select :currency_id, Currency.default_list, :id, :code
+              = f.collection_select :currency_id, @currencies, :id, :code
             .field.control
               = f.label :wallet_type, class: "radio" do
                 Наличные

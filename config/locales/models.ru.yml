@@ -12,3 +12,6 @@ ru:
       documents/expense_operation:
         one: Расходная операция
         other: Расходные операции
+      documents/periodic_expense:
+        one: Периодический расход
+        other: Периодические расходы

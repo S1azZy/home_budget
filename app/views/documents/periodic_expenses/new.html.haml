@@ -1,0 +1,28 @@
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .column.is-8.is-offset-2
+        %h3.title.has-text-black Новый расход
+        %hr.login-hr
+        .box
+          = form_for(@periodic_expense, url: documents_periodic_expenses_path) do |f|
+            .field.control.select.is-expanded
+              = f.collection_select :person_wallet_id, @person_wallets, :id, :name
+            .field.control.select.is-expanded
+              = f.collection_select :category_id, Category.all, :id, :name
+            .field.control
+              = f.number_field :amount, min: 0, max: 100_000_000, class: "input"
+            .field.control
+              = f.date_field :date_start
+            .field.control
+              = f.date_field :date_end
+            .field.control
+              = f.text_area :comment, class: "textarea"
+
+            = f.button :event, value: :post_document, type: :submit, class: "button is-block is-info is-fullwidth" do
+              Записать
+              %i.fa.fa-sign-in{"aria-hidden" => "true"}
+
+            = f.button type: :submit, class: "button is-block is-warning is-light is-fullwidth" do
+              Записать черновик
+              %i.fa.fa-sign-in{"aria-hidden" => "true"}

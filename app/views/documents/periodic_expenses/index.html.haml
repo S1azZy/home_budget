@@ -1,0 +1,42 @@
+%table.table.is-hoverable.is-striped.is-fullwidth
+  %thead
+    %tr
+      %th
+        = link_to "Новый расход", new_documents_periodic_expense_path,  class: "button is-info"
+    %tr
+      %th
+        %abbr{ title: "Name" } Кошелек
+      %th
+        %abbr{ title: "Currency" } Валюта
+      %th
+        %abbr{ title: "Category" } Категория
+      %th
+        %abbr{ title: "Amount" } Сумма
+      %th
+        %abbr{ title: "Даты" } Даты
+      %th
+        %abbr{ title: "Status" } Статус
+      %th
+        %abbr{ title: "Actions" } Действия
+  %tbody
+    - @periodic_expenses.each do |periodic_expenses|
+      - status_class = periodic_expenses.draft? ? "is-link is-light" : "is-success"
+      %tr
+        %td
+          = periodic_expenses.person_wallet.name
+        %td
+          = periodic_expenses.currency.code
+        %td
+          = periodic_expenses.category.name
+        %td
+          = number_to_human(periodic_expenses.total_amount, precision: 3)
+        %td
+          = "#{l(periodic_expenses.date_start)} - #{l(periodic_expenses.date_end)}"
+        %td
+          %span.tag{class: status_class}
+            = periodic_expenses.status
+        %td
+          .buttons
+            = button_to "edit", edit_documents_periodic_expense_path(periodic_expenses), method: :get, class: "button is-info"
+            = button_to "delete", documents_periodic_expense_path(periodic_expenses), method: :delete, class: "button is-danger"
+!= pagy_bulma_nav(@pagy)

@@ -10,6 +10,8 @@
             = PersonWallet.model_name.human(count: "")
           %a.navbar-item{ href: documents_expense_operations_path, class: controller_name == "expense_operations" ? "is-active" : "" }
             = Documents::ExpenseOperation.model_name.human(count: "")
+          %a.navbar-item{ href: documents_periodic_expenses_path, class: controller_name == "periodic_expenses" ? "is-active" : "" }
+            = Documents::PeriodicExpense.model_name.human(count: "")
         %div.navbar-end
           %div.navbar-item
             %div.buttons

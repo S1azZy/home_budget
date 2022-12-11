@@ -8,6 +8,7 @@ class Person < ApplicationRecord
   has_many :documents_money_transfers, class_name: "Documents::MoneyTransfer", dependent: :restrict_with_error
   has_many :documents_expense_operations, class_name: "Documents::ExpenseOperation", dependent: :restrict_with_error
   has_many :documents_income_operations, class_name: "Documents::IncomeOperation", dependent: :restrict_with_error
+  has_many :documents_periodic_expenses, class_name: "Documents::PeriodicExpense", dependent: :restrict_with_error
 
   validates :first_name, :last_name, length: { maximum: 100 }
   validates :first_name, presence: true

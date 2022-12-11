@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_140327) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_11_140103) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -82,6 +82,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_140327) do
     t.index ["person_id"], name: "index_documents_money_transfers_on_person_id"
     t.index ["person_wallet_from_id"], name: "index_documents_money_transfers_on_person_wallet_from_id"
     t.index ["person_wallet_to_id"], name: "index_documents_money_transfers_on_person_wallet_to_id"
+  end
+
+  create_table "documents_periodic_expenses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id", null: false
+    t.bigint "person_wallet_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "currency_id", null: false
+    t.decimal "currency_rate", precision: 20, scale: 10, default: "0.0", null: false
+    t.decimal "multiplicity", precision: 10, scale: 4, default: "1.0", null: false
+    t.integer "status", default: 0, null: false
+    t.decimal "amount", precision: 14, scale: 4, default: "0.0", null: false
+    t.date "date_start", null: false
+    t.date "date_end", null: false
+    t.string "comment", limit: 255
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_documents_periodic_expenses_on_category_id"
+    t.index ["currency_id"], name: "index_documents_periodic_expenses_on_currency_id"
+    t.index ["person_id"], name: "index_documents_periodic_expenses_on_person_id"
+    t.index ["person_wallet_id"], name: "index_documents_periodic_expenses_on_person_wallet_id"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -189,6 +209,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_140327) do
   add_foreign_key "documents_money_transfers", "people"
   add_foreign_key "documents_money_transfers", "person_wallets", column: "person_wallet_from_id", on_delete: :restrict
   add_foreign_key "documents_money_transfers", "person_wallets", column: "person_wallet_to_id", on_delete: :restrict
+  add_foreign_key "documents_periodic_expenses", "categories", on_delete: :restrict
+  add_foreign_key "documents_periodic_expenses", "currencies", on_delete: :restrict
+  add_foreign_key "documents_periodic_expenses", "people"
+  add_foreign_key "documents_periodic_expenses", "person_wallets", on_delete: :restrict
   add_foreign_key "person_configs", "currencies", column: "default_currency_id", on_delete: :restrict
   add_foreign_key "person_configs", "people"
   add_foreign_key "person_currencies", "currencies"
