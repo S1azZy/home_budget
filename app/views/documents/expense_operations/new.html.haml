@@ -13,7 +13,7 @@
             .field.control
               = f.number_field :amount, min: 0, max: 100_000_000, class: "input"
             .field.control
-              = f.datetime_local_field :transaction_time, value: Time.current.strftime("%Y-%m-%dT%T") # TODO: вынести эти куда-то
+              = f.datetime_local_field :transaction_time, value: @expense_operation.transaction_time || Time.current.strftime("%Y-%m-%dT%T")
             .field.control
               = f.text_area :comment, class: "textarea"
 

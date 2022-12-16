@@ -94,7 +94,7 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
     crass (1.0.6)
-    cssbundling-rails (1.1.1)
+    cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.1)
     debug (1.7.0)
@@ -120,7 +120,7 @@ GEM
       sassc (~> 2.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    haml (6.0.12)
+    haml (6.1.1)
       temple (>= 0.8.2)
       thor
       tilt
@@ -134,11 +134,11 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.5.11)
-    irb (1.6.0)
+    io-console (0.6.0)
+    irb (1.6.1)
       reline (>= 0.3.0)
     json (2.6.3)
-    loofah (2.19.0)
+    loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.8.0)
@@ -202,8 +202,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.4.3)
-      loofah (~> 2.3)
+    rails-html-sanitizer (1.4.4)
+      loofah (~> 2.19, >= 2.19.1)
     rails-i18n (7.0.6)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
@@ -221,7 +221,7 @@ GEM
     redis-client (0.11.2)
       connection_pool
     regexp_parser (2.6.1)
-    reline (0.3.1)
+    reline (0.3.2)
       io-console (~> 0.5)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -229,10 +229,10 @@ GEM
     rexml (3.2.5)
     rspec-core (3.12.0)
       rspec-support (~> 3.12.0)
-    rspec-expectations (3.12.0)
+    rspec-expectations (3.12.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-mocks (3.12.0)
+    rspec-mocks (3.12.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-rails (6.0.1)
@@ -263,7 +263,7 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.15.0)
+    rubocop-rspec (2.16.0)
       rubocop (~> 1.33)
     ruby-next-core (0.15.3)
     ruby-progressbar (1.11.0)
@@ -330,7 +330,7 @@ DEPENDENCIES
   brakeman
   bundler-audit
   capybara
-  cssbundling-rails (~> 1.1)
+  cssbundling-rails
   debug
   devise
   factory_bot_rails

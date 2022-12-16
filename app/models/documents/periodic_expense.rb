@@ -25,14 +25,16 @@ module Documents
       multiplicity * amount
     end
 
+    def days_count
+      (date_end - date_start).to_i + 1
+    end
+
+    private
+
     def date_start_lt_date_end
       return unless date_start >= date_end
 
       errors.add(:date_start, "Дата старта должна быть меньше даты окончания")
-    end
-
-    def days_count
-      (date_end - date_start).to_i + 1
     end
   end
 end

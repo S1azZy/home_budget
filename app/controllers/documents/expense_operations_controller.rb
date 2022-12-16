@@ -9,12 +9,21 @@ module Documents
     before_action :set_document, only: %i[edit update destroy]
     def index
       expense_operations =
-        Documents::ExpenseOperation.where(person: current_person).includes(:person_wallet, :currency, :category)
+        Documents::ExpenseOperation
+          .where(person: current_person)
+          .includes(:person_wallet, :currency, :category)
+          .order(created_at: :desc)
       @pagy, @expense_operations = pagy(expense_operations)
     end
 
     def new
-      @expense_operation = Documents::ExpenseOperation.new
+      if params.key?(:source_document_id)
+        source_document = Documents::ExpenseOperation.find(params[:source_document_id])
+        attrs = %w[amount comment person_wallet_id category_id transaction_time currency_rate multiplicity]
+        @expense_operation = Documents::ExpenseOperation.new(source_document.attributes.slice(*attrs))
+      else
+        @expense_operation = Documents::ExpenseOperation.new
+      end
     end
 
     def edit; end

@@ -17,7 +17,7 @@ gem "bcrypt"
 gem "bootsnap", require: false
 gem "brakeman", require: false
 gem "bundler-audit", require: false
-gem "cssbundling-rails", "~> 1.1"
+gem "cssbundling-rails"
 gem "devise"
 gem "font-awesome-sass"
 gem "haml"
@@ -36,6 +36,7 @@ gem "rubocop-rails", require: false
 gem "rubocop-rspec", require: false
 gem "sprockets-rails"
 gem "stimulus-rails"
+gem "terser", "~> 1.1"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -66,5 +67,3 @@ group :test do
 
   gem "webdrivers"
 end
-
-gem "terser", "~> 1.1"
