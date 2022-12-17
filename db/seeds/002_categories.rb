@@ -7,7 +7,8 @@ data = [
   %w[transport Транспорт],
   %w[travel Путешествия],
   ["utility", "Связь, интернет, ЖКУ"],
-  %w[house Жилье]
+  %w[house Жилье],
+  %w[entertainment Развлечения]
 ]
 
 data.each do |(slug, name)|

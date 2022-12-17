@@ -36,7 +36,7 @@ module Documents
           currency: person_wallet.currency,
           category: category,
           amount: params[:amount],
-          transaction_time: params[:transaction_time],
+          transaction_time: Time.zone.parse(params[:transaction_time]),
           comment: params[:comment]
         }
       end

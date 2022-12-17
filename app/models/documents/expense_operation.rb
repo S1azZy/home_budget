@@ -12,6 +12,7 @@ module Documents
 
     attribute :currency_rate, default: -> { 1 }
     attribute :multiplicity, default: -> { 1 }
+    attribute :transaction_time, default: -> { Time.current }
 
     validates :amount, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: DEFAULT_MAXIMUM_AMOUNT }
     validates :currency_rate,

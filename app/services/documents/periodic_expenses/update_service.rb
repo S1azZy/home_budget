@@ -36,8 +36,8 @@ module Documents
           currency: person_wallet.currency,
           category: category,
           amount: params[:amount],
-          date_start: params[:date_start],
-          date_end: params[:date_end],
+          date_start: Time.zone.parse(params[:date_start]),
+          date_end: Time.zone.parse(params[:date_end]),
           comment: params[:comment]
         }
       end
