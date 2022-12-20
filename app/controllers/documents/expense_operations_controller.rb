@@ -10,9 +10,9 @@ module Documents
     def index
       expense_operations =
         Documents::ExpenseOperation
-          .where(person: current_person)
-          .includes(:person_wallet, :currency, :category)
-          .order(created_at: :desc)
+        .where(person: current_person)
+        .includes(:person_wallet, :currency, :category)
+        .order(created_at: :desc)
       @pagy, @expense_operations = pagy(expense_operations)
     end
 

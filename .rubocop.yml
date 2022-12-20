@@ -28,3 +28,4 @@ Style/HashSyntax:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
   ConsistentQuotesInMultiline: true
+

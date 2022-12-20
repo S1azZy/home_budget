@@ -57,7 +57,7 @@ module Documents
 
     def document_params
       params.require(:documents_periodic_expense).permit(:person_wallet_id, :currency_id, :category_id, :amount,
-                                                          :date_start, :date_end, :comment, :event)
+                                                         :date_start, :date_end, :comment, :event)
     end
 
     def set_variables

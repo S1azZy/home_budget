@@ -4,7 +4,7 @@ class PersonWalletsController < ApplicationController
   include Pagy::Backend
 
   before_action :authenticate_user!
-  before_action :set_variables, only: [:new, :create, :edit, :update]
+  before_action :set_variables, only: %i[new create edit update]
   def index
     @person_wallets = PersonWallet.where(person: current_person).includes(:currency, :group)
   end
