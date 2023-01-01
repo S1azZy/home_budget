@@ -6,7 +6,7 @@ module Documents
       def initialize(person, params)
         @person = person
         @params = params
-        @event = params.delete("event")
+        @event = params.delete(:event)
         @person_wallet = person.person_wallets.find_by(id: params[:person_wallet_id])
         @currency = Currency.find_by(id: params[:currency_id]) || person_wallet.currency
         @category = Category.find(params[:category_id])

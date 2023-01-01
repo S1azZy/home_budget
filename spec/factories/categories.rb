@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :category do
     name { FFaker::Lorem.word }
-    slug { FFaker::Internet.slug }
+    slug { FFaker::Internet.slug.rjust(15) }
   end
 end

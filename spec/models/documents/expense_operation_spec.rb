@@ -8,7 +8,7 @@ RSpec.describe Documents::ExpenseOperation do
     it { is_expected.to belong_to(:person_wallet) }
     it { is_expected.to belong_to(:currency) }
     it { is_expected.to belong_to(:category) }
-    it { is_expected.to have_many(:person_transactions).dependent(:restrict_with_error) }
+    it { is_expected.to have_many(:person_transactions).dependent(:destroy) }
   end
 
   describe "validations" do

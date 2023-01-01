@@ -3,7 +3,6 @@
 require "rails_helper"
 
 RSpec.describe Documents::ExpenseOperations::UpdateService do
-
   context "when condition" do
     it "succeeds" do
       pending "Not implemented"
