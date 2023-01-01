@@ -39,5 +39,5 @@
           .buttons
             = link_to "copy", new_documents_expense_operation_path(source_document_id: expense_operation.id), class: "button is-success"
             = button_to "edit", edit_documents_expense_operation_path(expense_operation), method: :get, class: "button is-info"
-            = button_to "delete", documents_expense_operation_path(expense_operation), method: :delete, class: "button is-danger"
+            = button_to "delete", documents_expense_operation_path(expense_operation), method: :delete, class: "button is-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
 != pagy_bulma_nav(@pagy)
