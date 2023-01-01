@@ -12,10 +12,12 @@ require:
   - rubocop-performance
 
 Metrics/AbcSize:
+  CountRepeatedAttributes: false
   Exclude:
     - "db/migrate/*.rb"
 
 Metrics/MethodLength:
+  Max: 25
   Exclude:
     - "db/migrate/*.rb"
 

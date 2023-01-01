@@ -2,5 +2,8 @@
 
 FactoryBot.define do
   factory :person_currency do
+    association :person
+    association :currency
+    multiplicity { 1 }
   end
 end

@@ -3,9 +3,7 @@
 module Documents
   module PeriodicExpenses
     class PostService
-      def self.call(...)
-        new(...).call
-      end
+      include Callable
 
       def initialize(document)
         @document = document
@@ -22,13 +20,8 @@ module Documents
 
           (document.date_start..document.date_end).each do |transaction_date|
             expense = transaction_date == document.date_end ? total_amount : daily_amount
-            transaction = document.person_transactions.create!(
-              person_wallet: document.person_wallet,
-              currency: document.currency,
-              expense: expense,
-              posted_at: transaction_date
-            )
-            transaction.categories << document.category
+
+            create_transaction(expense, transaction_date)
 
             total_amount -= expense
           end
@@ -40,6 +33,21 @@ module Documents
       private
 
       attr_reader :document
+
+      def transaction_attributes(expense, transaction_date)
+        {
+          person_wallet: document.person_wallet,
+          currency: document.currency,
+          expense: expense,
+          posted_at: transaction_date
+        }
+      end
+
+      def create_transaction(expense, transaction_date)
+        attrs = transaction_attributes(expense, transaction_date)
+        transaction = document.person_transactions.create!(attrs)
+        transaction.categories << document.category
+      end
     end
   end
 end

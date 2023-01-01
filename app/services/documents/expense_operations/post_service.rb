@@ -3,9 +3,7 @@
 module Documents
   module ExpenseOperations
     class PostService
-      def self.call(...)
-        new(...).call
-      end
+      include Callable
 
       def initialize(document)
         @document = document
@@ -17,8 +15,7 @@ module Documents
         Documents::ExpenseOperation.transaction do
           document.person_transactions.destroy_all
 
-          transaction = document.person_transactions.create!(person_wallet: document.person_wallet,
-                                                             currency: document.currency, expense: document.total_amount, posted_at: document.transaction_time)
+          transaction = document.person_transactions.create!(transaction_attributes)
           transaction.categories << document.category
         end
 
@@ -28,6 +25,15 @@ module Documents
       private
 
       attr_reader :document
+
+      def transaction_attributes
+        {
+          person_wallet: document.person_wallet,
+          currency: document.currency,
+          expense: document.total_amount,
+          posted_at: document.transaction_time
+        }
+      end
     end
   end
 end
