@@ -22,7 +22,7 @@ class PersonWalletsController < ApplicationController
 
     if @person_wallet.save
       flash[:notice] = t("notifications.create.success")
-      redirect_to person_wallet_path(@person_wallet)
+      redirect_to edit_person_wallet_path(@person_wallet)
     else
       flash[:alert] = t("notifications.create.failure")
       render :new
@@ -34,7 +34,7 @@ class PersonWalletsController < ApplicationController
 
     if @person_wallet.update(person_wallet_params)
       flash[:notice] = t("notifications.update.success")
-      redirect_to person_wallet_path(@person_wallet)
+      redirect_to edit_person_wallet_path(@person_wallet)
     else
       flash[:alert] = t("notifications.update.failure")
       render :edit
@@ -44,7 +44,7 @@ class PersonWalletsController < ApplicationController
   private
 
   def set_variables
-    @currencies = Currency.join(:person_currencies).merge(PersonCurrency.where(person: current_person))
+    @currencies = Currency.joins(:person_currencies).merge(PersonCurrency.where(person: current_person))
   end
 
   def person_wallet_params

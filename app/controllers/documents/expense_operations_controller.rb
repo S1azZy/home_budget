@@ -45,7 +45,7 @@ module Documents
 
       if service.call
         flash[:notice] = t("notifications.update.success")
-        redirect_to documents_expense_operation_path(@expense_operation)
+        redirect_to edit_documents_expense_operation_path(@expense_operation)
       else
         flash[:alert] = t("notifications.update.failure")
         render :edit

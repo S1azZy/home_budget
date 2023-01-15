@@ -11,7 +11,7 @@
             .field.control.select.is-expanded
               = f.collection_select :category_id, Category.all, :id, :name
             .field.control
-              = f.number_field :amount, min: 0, max: 100_000_000, class: "input"
+              = f.number_field :amount, min: 0, max: 100_000_000, class: "input", step: ".01"
             .field.control
               = f.datetime_local_field :transaction_time, value: @expense_operation.transaction_time.strftime("%Y-%m-%dT%T")
             .field.control
