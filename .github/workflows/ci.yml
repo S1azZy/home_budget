@@ -10,15 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: wasabeef/import-asdf-tool-versions-action@v1
-        id: asdf
+      - name: Read .tool-versions
+        uses: marocchino/tool-versions-action@v1
+        id: versions
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ steps.asdf.outputs.ruby }}
+          ruby-version: ${{ steps.versions.outputs.ruby }}
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
